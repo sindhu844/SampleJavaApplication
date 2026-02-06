@@ -1,0 +1,22 @@
+name: java ci/cd
+on:
+  push: 
+    branches:
+      - main
+jobs:
+  checkout_and_build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout from main
+        uses: actions/checkout@v6.0.2
+      - name: build
+        run: mvn clean install
+     
+      - name: Upload to JFrog Artifactory
+        env:
+          JFROG_USER: ${{ secrets.JFROG_USER }}
+          JFROG_API_KEY: ${{ secrets.JFROG_API_KEY }}
+          JAR_FILE: target/simple-java-app-1.0.jar
+          ARTIFACT_ID: simple-java-app
+          VERSION: 1.0
+        run: curl -u $JFROG_USER:$JFROG_API_KEY -T $JAR_FILE "$REPO_URL$ARTIFACT_ID/$VERSION/${ARTIFACT_ID}-${VERSION}.jar"
