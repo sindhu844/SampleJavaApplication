@@ -10,12 +10,12 @@ jobs:
   ci-workflow:
     runs-on: ubuntu-latest
     steps:
-      name: checkout code from GitHub
-      uses: actions/checkout@v6
+      - name: checkout code from GitHub
+        uses: actions/checkout@v6
    steps:
-      name: build the java app
-      run: mvn clean install
+      - name: build the java app
+        run: mvn clean install
    steps:
-      name: test the java app
-      run: mvn clean test
+      - name: test the java app
+        run: mvn clean test
 
