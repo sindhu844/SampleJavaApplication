@@ -1,10 +1,10 @@
 name: ci/cd workflow1
 on:
   push:
-    branch:
+    branches:
       - main
-  pull-request:
-    branch:
+  pull_request:
+    branches:
       - main
 jobs:
   ci-workflow:
