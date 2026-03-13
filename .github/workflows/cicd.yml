@@ -11,11 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout code from GitHub
-        uses: actions/checkout@v6
-   steps:
+        uses: actions/checkout@v4
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
       - name: build the java app
         run: mvn clean install
-   steps:
       - name: test the java app
-        run: mvn clean test
+        run: mvn test
 
