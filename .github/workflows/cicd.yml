@@ -14,7 +14,7 @@ on:
    # branches:
     #  - main
 jobs:
-  ci-workflow:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: checkout code from GitHub
@@ -26,8 +26,19 @@ jobs:
           java-version: '17'
       - name: build the java app
         run: mvn clean install
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
       - name: test the java app
         run: mvn test
       - name: print env
         run: echo "environment is ${{inputs.environment}}"
-
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy
+        run: echo "deploy application on ${{secrets.SAMPLE_SECRETE}}"
