@@ -42,3 +42,7 @@ jobs:
     steps:
       - name: deploy
         run: echo "deploy application on ${{secrets.SAMPLE_SECRETE}}"
+      - name: Check secret length
+        run: echo "Secret length: ${#MY_SECRET}"
+        env:
+          MY_SECRET: ${{ secrets.SAMPLE_SECRETE }}
