@@ -28,4 +28,6 @@ jobs:
         run: mvn clean install
       - name: test the java app
         run: mvn test
+      - name: print env
+        run: ${{inputs.environment.default}}
 
