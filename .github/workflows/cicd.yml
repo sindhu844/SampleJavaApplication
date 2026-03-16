@@ -29,5 +29,5 @@ jobs:
       - name: test the java app
         run: mvn test
       - name: print env
-        run: ${{inputs.environment.default}}
+        run: echo "environment is ${{inputs.environment}}"
 
